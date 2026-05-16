@@ -1,0 +1,21 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Головна";
+}
+
+<div class="container mt-5">
+    <div class="p-5 bg-light rounded-3 shadow-sm">
+        <h1 class="display-5">ShopDB Web Application</h1>
+        <p class="lead">
+            Вебзастосунок для роботи з базою даних магазину на основі ASP.NET Core Razor Pages та Entity Framework Core.
+        </p>
+        <hr />
+        <p>
+            У системі реалізовано перегляд, пошук, додавання, редагування та видалення товарів.
+        </p>
+        <a asp-page="/Goods/Index" class="btn btn-primary btn-lg">
+            Перейти до товарів
+        </a>
+    </div>
+</div>

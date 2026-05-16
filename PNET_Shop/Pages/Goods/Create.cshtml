@@ -1,0 +1,58 @@
+﻿@page
+@model PNET_Shop.Pages.Goods.CreateModel
+@{
+    ViewData["Title"] = "Додати товар";
+}
+
+<h1>Додати товар</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Good.Name" class="form-label">Назва</label>
+        <input asp-for="Good.Name" class="form-control" />
+        <span asp-validation-for="Good.Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Good.Price" class="form-label">Ціна</label>
+        <input asp-for="Good.Price" class="form-control" />
+        <span asp-validation-for="Good.Price" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Good.Quantity" class="form-label">Кількість</label>
+        <input asp-for="Good.Quantity" class="form-control" />
+        <span asp-validation-for="Good.Quantity" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Good.Producer" class="form-label">Виробник</label>
+        <input asp-for="Good.Producer" class="form-control" />
+        <span asp-validation-for="Good.Producer" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Good.DeptId" class="form-label">Відділ</label>
+        <select asp-for="Good.DeptId" asp-items="Model.Departments" class="form-control"></select>
+        <span asp-validation-for="Good.DeptId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Good.SupplierId" class="form-label">Постачальник</label>
+        <select asp-for="Good.SupplierId" asp-items="Model.Suppliers" class="form-control"></select>
+        <span asp-validation-for="Good.SupplierId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Good.Description" class="form-label">Опис</label>
+        <input asp-for="Good.Description" class="form-control" />
+        <span asp-validation-for="Good.Description" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Зберегти</button>
+    <a asp-page="./Index" class="btn btn-secondary">Назад</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
