@@ -6,6 +6,7 @@ namespace PNET_Shop.Models
     public class Sale
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("SALE_ID")]
         public int SaleId { get; set; }
 

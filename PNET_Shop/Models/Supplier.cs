@@ -6,6 +6,7 @@ namespace PNET_Shop.Models
     public class Supplier
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("SUPPLIER_ID")]
         public int SupplierId { get; set; }
 

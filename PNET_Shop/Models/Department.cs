@@ -6,8 +6,9 @@ namespace PNET_Shop.Models
     public class Department
     {
         [Key]
-        [Column("DEPT_ID", TypeName = "decimal(4,0)")]
-        public decimal DeptId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("DEPT_ID")]
+        public int DeptId { get; set; }
 
         [Required(ErrorMessage = "Назва відділу є обов'язковою")]
         [StringLength(20)]

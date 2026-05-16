@@ -1,0 +1,36 @@
+@page "{id:int}"
+@model PNET_Shop.Pages.Departments.DeleteModel
+@{
+    ViewData["Title"] = "Видалити відділ";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-3">Видалити відділ</h1>
+
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+    <div class="alert alert-warning">
+        Ви впевнені, що хочете видалити цей відділ?
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">Код</dt>
+                <dd class="col-sm-9">@Model.Department.DeptId</dd>
+
+                <dt class="col-sm-3">Назва</dt>
+                <dd class="col-sm-9"><strong>@Model.Department.Name</strong></dd>
+
+                <dt class="col-sm-3">Інформація</dt>
+                <dd class="col-sm-9">@(Model.Department.Info ?? "—")</dd>
+            </dl>
+        </div>
+    </div>
+
+    <form method="post">
+        <input type="hidden" asp-for="Department.DeptId" />
+        <button type="submit" class="btn btn-danger">Видалити</button>
+        <a asp-page="./Index" class="btn btn-secondary">Скасувати</a>
+    </form>
+</div>

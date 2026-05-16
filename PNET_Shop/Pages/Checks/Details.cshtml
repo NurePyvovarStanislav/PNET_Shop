@@ -1,0 +1,33 @@
+@page "{id:int}"
+@model PNET_Shop.Pages.Checks.DetailsModel
+@{
+    ViewData["Title"] = "Деталі чека";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="mb-0">Деталі чека</h1>
+        <div>
+            <a asp-page="./Edit" asp-route-id="@Model.Check.CheckNo" class="btn btn-warning">Редагувати</a>
+            <a asp-page="./Index" class="btn btn-secondary">Назад</a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">Номер чека</dt>
+                <dd class="col-sm-9"><strong>@Model.Check.CheckNo</strong></dd>
+
+                <dt class="col-sm-3">Дата</dt>
+                <dd class="col-sm-9">@Model.Check.CheckDate.ToString("g")</dd>
+
+                <dt class="col-sm-3">Загальна сума</dt>
+                <dd class="col-sm-9">@Model.Check.TotalSum</dd>
+
+                <dt class="col-sm-3">Касир</dt>
+                <dd class="col-sm-9">@(Model.Check.CashierName ?? "—")</dd>
+            </dl>
+        </div>
+    </div>
+</div>

@@ -66,5 +66,10 @@ namespace PNET_Shop.Repositories
         {
             return await _context.Goods.AnyAsync(g => g.GoodId == id);
         }
+
+        public async Task<bool> HasSalesAsync(int goodId)
+        {
+            return await _context.Sales.AnyAsync(s => s.GoodId == goodId);
+        }
     }
 }

@@ -6,6 +6,7 @@ namespace PNET_Shop.Models
     public class Check
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("CHECK_NO")]
         public int CheckNo { get; set; }
 

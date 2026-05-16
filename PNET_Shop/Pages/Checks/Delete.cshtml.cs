@@ -1,57 +1,56 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using PNET_Shop.Models;
 using PNET_Shop.Repositories;
+using CheckEntity = PNET_Shop.Models.Check;
 
-namespace PNET_Shop.Pages.Goods
+namespace PNET_Shop.Pages.Checks
 {
     public class DeleteModel : PageModel
     {
-        private readonly IGoodRepository _repository;
+        private readonly ICheckRepository _repository;
         private readonly ILogger<DeleteModel> _logger;
 
-        public DeleteModel(IGoodRepository repository, ILogger<DeleteModel> logger)
+        public DeleteModel(ICheckRepository repository, ILogger<DeleteModel> logger)
         {
             _repository = repository;
             _logger = logger;
         }
 
         [BindProperty]
-        public Good Good { get; set; } = default!;
+        public CheckEntity Check { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var good = await _repository.GetByIdAsync(id);
+            var check = await _repository.GetByIdAsync(id);
 
-            if (good == null)
+            if (check == null)
             {
                 return NotFound();
             }
 
-            Good = good;
-
+            Check = check;
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int id)
         {
-            var good = await _repository.GetByIdAsync(id);
+            var check = await _repository.GetByIdAsync(id);
 
-            if (good == null)
+            if (check == null)
             {
                 return NotFound();
             }
 
             if (await _repository.HasSalesAsync(id))
             {
-                Good = good;
-                ModelState.AddModelError(string.Empty, "Неможливо видалити товар, оскільки до нього прив'язані продажі.");
+                Check = check;
+                ModelState.AddModelError(string.Empty, "Неможливо видалити чек, оскільки до нього прив'язані продажі.");
                 return Page();
             }
 
             await _repository.DeleteAsync(id);
 
-            _logger.LogInformation("Видалено товар: {GoodName} (Id: {GoodId})", good.Name, good.GoodId);
+            _logger.LogInformation("Видалено чек: {CheckNo}", check.CheckNo);
 
             return RedirectToPage("./Index");
         }

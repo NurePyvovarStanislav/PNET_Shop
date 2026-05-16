@@ -1,0 +1,34 @@
+@page
+@model PNET_Shop.Pages.Departments.CreateModel
+@{
+    ViewData["Title"] = "Додати відділ";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-3">Додати відділ</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="post">
+                <div class="mb-3">
+                    <label asp-for="Department.Name" class="form-label">Назва</label>
+                    <input asp-for="Department.Name" class="form-control" />
+                    <span asp-validation-for="Department.Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Department.Info" class="form-label">Інформація</label>
+                    <textarea asp-for="Department.Info" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Department.Info" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Зберегти</button>
+                <a asp-page="./Index" class="btn btn-secondary">Назад</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

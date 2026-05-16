@@ -1,0 +1,39 @@
+@page "{id:int}"
+@model PNET_Shop.Pages.Checks.DeleteModel
+@{
+    ViewData["Title"] = "Видалити чек";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-3">Видалити чек</h1>
+
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+    <div class="alert alert-warning">
+        Ви впевнені, що хочете видалити цей чек?
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">Номер чека</dt>
+                <dd class="col-sm-9"><strong>@Model.Check.CheckNo</strong></dd>
+
+                <dt class="col-sm-3">Дата</dt>
+                <dd class="col-sm-9">@Model.Check.CheckDate.ToString("g")</dd>
+
+                <dt class="col-sm-3">Загальна сума</dt>
+                <dd class="col-sm-9">@Model.Check.TotalSum</dd>
+
+                <dt class="col-sm-3">Касир</dt>
+                <dd class="col-sm-9">@(Model.Check.CashierName ?? "—")</dd>
+            </dl>
+        </div>
+    </div>
+
+    <form method="post">
+        <input type="hidden" asp-for="Check.CheckNo" />
+        <button type="submit" class="btn btn-danger">Видалити</button>
+        <a asp-page="./Index" class="btn btn-secondary">Скасувати</a>
+    </form>
+</div>

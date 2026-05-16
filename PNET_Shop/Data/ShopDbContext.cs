@@ -29,7 +29,7 @@ namespace PNET_Shop.Data
             modelBuilder.Entity<Department>()
                 .Property(d => d.DeptId)
                 .HasColumnName("DEPT_ID")
-                .HasColumnType("decimal(4,0)");
+                .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Department>()
                 .Property(d => d.Name)
@@ -77,8 +77,7 @@ namespace PNET_Shop.Data
 
             modelBuilder.Entity<Good>()
                 .Property(g => g.DeptId)
-                .HasColumnName("DEPT_ID")
-                .HasColumnType("decimal(4,0)");
+                .HasColumnName("DEPT_ID");
 
             modelBuilder.Entity<Good>()
                 .Property(g => g.SupplierId)

@@ -1,0 +1,41 @@
+@page "{id:int}"
+@model PNET_Shop.Pages.Sales.DetailsModel
+@{
+    ViewData["Title"] = "Деталі продажу";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="mb-0">Деталі продажу</h1>
+        <div>
+            <a asp-page="./Edit" asp-route-id="@Model.Sale.SaleId" class="btn btn-warning">Редагувати</a>
+            <a asp-page="./Index" class="btn btn-secondary">Назад</a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">№ продажу</dt>
+                <dd class="col-sm-9">@Model.Sale.SaleId</dd>
+
+                <dt class="col-sm-3">Товар</dt>
+                <dd class="col-sm-9"><strong>@Model.Sale.Good?.Name</strong></dd>
+
+                <dt class="col-sm-3">Чек</dt>
+                <dd class="col-sm-9">
+                    @if (Model.Sale.Check != null)
+                    {
+                        <text>№@Model.Sale.Check.CheckNo — @Model.Sale.Check.CheckDate.ToString("dd.MM.yyyy")</text>
+                    }
+                </dd>
+
+                <dt class="col-sm-3">Дата продажу</dt>
+                <dd class="col-sm-9">@Model.Sale.DateSale.ToString("dd.MM.yyyy HH:mm")</dd>
+
+                <dt class="col-sm-3">Кількість</dt>
+                <dd class="col-sm-9">@Model.Sale.Quantity</dd>
+            </dl>
+        </div>
+    </div>
+</div>

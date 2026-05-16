@@ -30,7 +30,8 @@ namespace PNET_Shop.Migrations
                 name: "Departments",
                 columns: table => new
                 {
-                    DEPT_ID = table.Column<decimal>(type: "decimal(4,0)", nullable: false),
+                    DEPT_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     NAME = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     INFO = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true)
                 },
@@ -64,7 +65,7 @@ namespace PNET_Shop.Migrations
                     PRICE = table.Column<double>(type: "float", nullable: false),
                     QUANTITY = table.Column<int>(type: "int", nullable: false),
                     PRODUCER = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    DEPT_ID = table.Column<decimal>(type: "decimal(4,0)", nullable: false),
+                    DEPT_ID = table.Column<int>(type: "int", nullable: false),
                     SUPPLIER_ID = table.Column<int>(type: "int", nullable: false),
                     DESCRIPTION = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
                 },

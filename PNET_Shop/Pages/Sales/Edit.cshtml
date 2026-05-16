@@ -1,0 +1,50 @@
+@page "{id:int}"
+@model PNET_Shop.Pages.Sales.EditModel
+@{
+    ViewData["Title"] = "Редагувати продаж";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-3">Редагувати продаж</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="post">
+                <input type="hidden" asp-for="Sale.SaleId" />
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Sale.GoodId" class="form-label">Товар</label>
+                        <select asp-for="Sale.GoodId" asp-items="Model.Goods" class="form-select"></select>
+                        <span asp-validation-for="Sale.GoodId" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Sale.CheckNo" class="form-label">Чек</label>
+                        <select asp-for="Sale.CheckNo" asp-items="Model.Checks" class="form-select"></select>
+                        <span asp-validation-for="Sale.CheckNo" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Sale.DateSale" class="form-label">Дата продажу</label>
+                        <input asp-for="Sale.DateSale" type="datetime-local" class="form-control" />
+                        <span asp-validation-for="Sale.DateSale" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Sale.Quantity" class="form-label">Кількість</label>
+                        <input asp-for="Sale.Quantity" type="number" min="1" class="form-control" />
+                        <span asp-validation-for="Sale.Quantity" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Зберегти</button>
+                <a asp-page="./Index" class="btn btn-secondary">Назад</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

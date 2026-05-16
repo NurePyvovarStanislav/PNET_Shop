@@ -1,0 +1,73 @@
+@page
+@model PNET_Shop.Pages.Sales.IndexModel
+@{
+    ViewData["Title"] = "Продажі";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h1 class="mb-1">Продажі</h1>
+            <p class="text-muted mb-0">Перегляд та керування продажами магазину</p>
+        </div>
+
+        <a asp-page="Create" class="btn btn-primary">
+            + Додати продаж
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-hover table-bordered mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>№ продажу</th>
+                        <th>Товар</th>
+                        <th>Чек</th>
+                        <th>Дата продажу</th>
+                        <th>Кількість</th>
+                        <th class="text-center" style="width: 320px; min-width: 320px;">Дії</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Sales.Any())
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-muted p-4">
+                                Дані відсутні
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.Sales)
+                        {
+                            <tr>
+                                <td>@item.SaleId</td>
+                                <td><strong>@item.Good?.Name</strong></td>
+                                <td>@item.Check?.CheckNo</td>
+                                <td>@item.DateSale.ToString("dd.MM.yyyy HH:mm")</td>
+                                <td>@item.Quantity</td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center align-items-center gap-2 flex-nowrap">
+                                        <a asp-page="./Details" asp-route-id="@item.SaleId" class="btn btn-sm btn-secondary">
+                                            Деталі
+                                        </a>
+
+                                        <a asp-page="./Edit" asp-route-id="@item.SaleId" class="btn btn-sm btn-warning">
+                                            Редагувати
+                                        </a>
+
+                                        <a asp-page="./Delete" asp-route-id="@item.SaleId" class="btn btn-sm btn-danger">
+                                            Видалити
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

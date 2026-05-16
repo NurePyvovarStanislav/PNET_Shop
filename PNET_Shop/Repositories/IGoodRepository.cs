@@ -10,5 +10,6 @@ namespace PNET_Shop.Repositories
         Task UpdateAsync(Good good);
         Task DeleteAsync(int id);
         Task<bool> ExistsAsync(int id);
+        Task<bool> HasSalesAsync(int goodId);
     }
 }

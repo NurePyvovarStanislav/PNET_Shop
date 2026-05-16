@@ -12,7 +12,7 @@ using PNET_Shop.Data;
 namespace PNET_Shop.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    [Migration("20260516152837_InitialCreate")]
+    [Migration("20260516202551_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -54,9 +54,12 @@ namespace PNET_Shop.Migrations
 
             modelBuilder.Entity("PNET_Shop.Models.Department", b =>
                 {
-                    b.Property<decimal>("DeptId")
-                        .HasColumnType("decimal(4,0)")
+                    b.Property<int>("DeptId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasColumnName("DEPT_ID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DeptId"));
 
                     b.Property<string>("Info")
                         .HasMaxLength(150)
@@ -83,8 +86,8 @@ namespace PNET_Shop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GoodId"));
 
-                    b.Property<decimal>("DeptId")
-                        .HasColumnType("decimal(4,0)")
+                    b.Property<int>("DeptId")
+                        .HasColumnType("int")
                         .HasColumnName("DEPT_ID");
 
                     b.Property<string>("Description")

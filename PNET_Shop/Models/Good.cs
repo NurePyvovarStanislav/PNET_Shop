@@ -6,6 +6,7 @@ namespace PNET_Shop.Models
     public class Good
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("GOOD_ID")]
         public int GoodId { get; set; }
 
@@ -29,8 +30,8 @@ namespace PNET_Shop.Models
         public string? Producer { get; set; }
 
         [Required(ErrorMessage = "Відділ є обов'язковим")]
-        [Column("DEPT_ID", TypeName = "decimal(4,0)")]
-        public decimal DeptId { get; set; }
+        [Column("DEPT_ID")]
+        public int DeptId { get; set; }
 
         [Required(ErrorMessage = "Постачальник є обов'язковим")]
         [Column("SUPPLIER_ID")]

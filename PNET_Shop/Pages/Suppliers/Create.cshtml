@@ -1,0 +1,40 @@
+@page
+@model PNET_Shop.Pages.Suppliers.CreateModel
+@{
+    ViewData["Title"] = "Додати постачальника";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-3">Додати постачальника</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="post">
+                <div class="mb-3">
+                    <label asp-for="Supplier.Name" class="form-label">Назва</label>
+                    <input asp-for="Supplier.Name" class="form-control" />
+                    <span asp-validation-for="Supplier.Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Supplier.Phone" class="form-label">Телефон</label>
+                    <input asp-for="Supplier.Phone" class="form-control" />
+                    <span asp-validation-for="Supplier.Phone" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Supplier.Address" class="form-label">Адреса</label>
+                    <input asp-for="Supplier.Address" class="form-control" />
+                    <span asp-validation-for="Supplier.Address" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Зберегти</button>
+                <a asp-page="./Index" class="btn btn-secondary">Назад</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

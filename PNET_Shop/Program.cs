@@ -16,6 +16,10 @@ namespace PNET_Shop
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ShopDbConnection")));
 
             builder.Services.AddScoped<IGoodRepository, GoodRepository>();
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
+            builder.Services.AddScoped<ICheckRepository, CheckRepository>();
+            builder.Services.AddScoped<ISaleRepository, SaleRepository>();
 
             builder.Logging.ClearProviders();
             builder.Logging.AddConsole();

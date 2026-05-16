@@ -1,0 +1,55 @@
+@page "{id:int}"
+@model PNET_Shop.Pages.Checks.EditModel
+@using System.Globalization
+@{
+    ViewData["Title"] = "Редагувати чек";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-3">Редагувати чек</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="post">
+                <input type="hidden" asp-for="Check.CheckNo" />
+
+                <div class="mb-3">
+                    <label asp-for="Check.CheckNo" class="form-label">Номер чека</label>
+                    <input asp-for="Check.CheckNo" class="form-control" readonly />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Check.CheckDate" class="form-label">Дата чека</label>
+                    <input asp-for="Check.CheckDate"
+                           type="datetime-local"
+                           class="form-control"
+                           value="@Model.Check.CheckDate.ToString("yyyy-MM-ddTHH:mm")" />
+                    <span asp-validation-for="Check.CheckDate" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Check.TotalSum" class="form-label">Загальна сума</label>
+                    <input asp-for="Check.TotalSum"
+                           type="number"
+                           step="0.01"
+                           class="form-control"
+                           value="@Model.Check.TotalSum.ToString(CultureInfo.InvariantCulture)" />
+                    <span asp-validation-for="Check.TotalSum" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Check.CashierName" class="form-label">Касир</label>
+                    <input asp-for="Check.CashierName" class="form-control" />
+                    <span asp-validation-for="Check.CashierName" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Зберегти</button>
+                <a asp-page="./Index" class="btn btn-secondary">Назад</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

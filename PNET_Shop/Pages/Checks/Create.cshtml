@@ -1,0 +1,45 @@
+@page
+@model PNET_Shop.Pages.Checks.CreateModel
+@{
+    ViewData["Title"] = "Додати чек";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-3">Додати чек</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="post">
+                <div class="mb-3">
+                    <label asp-for="Check.CheckDate" class="form-label">Дата чека</label>
+                    <input asp-for="Check.CheckDate"
+                           type="datetime-local"
+                           class="form-control" />
+                    <span asp-validation-for="Check.CheckDate" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Check.TotalSum" class="form-label">Загальна сума</label>
+                    <input asp-for="Check.TotalSum"
+                           type="number"
+                           step="0.01"
+                           class="form-control" />
+                    <span asp-validation-for="Check.TotalSum" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Check.CashierName" class="form-label">Касир</label>
+                    <input asp-for="Check.CashierName" class="form-control" />
+                    <span asp-validation-for="Check.CashierName" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Зберегти</button>
+                <a asp-page="./Index" class="btn btn-secondary">Назад</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
