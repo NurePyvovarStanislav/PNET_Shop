@@ -1,4 +1,43 @@
-﻿@page
+﻿@page "{id:int}"
 @model PNET_Shop.Pages.Goods.DeleteModel
 @{
+    ViewData["Title"] = "Видалити товар";
 }
+
+<div class="container mt-4">
+    <h1 class="mb-3">Видалити товар</h1>
+
+    <div class="alert alert-warning">
+        Ви впевнені, що хочете видалити цей товар? Цю дію неможливо скасувати.
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">Назва</dt>
+                <dd class="col-sm-9"><strong>@Model.Good.Name</strong></dd>
+
+                <dt class="col-sm-3">Ціна</dt>
+                <dd class="col-sm-9">@Model.Good.Price</dd>
+
+                <dt class="col-sm-3">Кількість</dt>
+                <dd class="col-sm-9">@Model.Good.Quantity</dd>
+
+                <dt class="col-sm-3">Виробник</dt>
+                <dd class="col-sm-9">@(Model.Good.Producer ?? "—")</dd>
+
+                <dt class="col-sm-3">Відділ</dt>
+                <dd class="col-sm-9">@Model.Good.Department?.Name</dd>
+
+                <dt class="col-sm-3">Постачальник</dt>
+                <dd class="col-sm-9">@Model.Good.Supplier?.Name</dd>
+            </dl>
+        </div>
+    </div>
+
+    <form method="post">
+        <input type="hidden" asp-for="Good.GoodId" />
+        <button type="submit" class="btn btn-danger">Видалити</button>
+        <a asp-page="./Index" class="btn btn-secondary">Скасувати</a>
+    </form>
+</div>

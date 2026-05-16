@@ -1,28 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using PNET_Shop.Data;
 using PNET_Shop.Models;
+using PNET_Shop.Repositories;
 
 namespace PNET_Shop.Pages.Goods
 {
     public class DetailsModel : PageModel
     {
-        private readonly ShopDbContext _context;
+        private readonly IGoodRepository _repository;
 
-        public DetailsModel(ShopDbContext context)
+        public DetailsModel(IGoodRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public Good Good { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var good = await _context.Goods
-                .Include(g => g.Department)
-                .Include(g => g.Supplier)
-                .FirstOrDefaultAsync(m => m.GoodId == id);
+            var good = await _repository.GetByIdAsync(id);
 
             if (good == null)
             {

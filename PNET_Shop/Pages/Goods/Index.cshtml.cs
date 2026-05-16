@@ -1,19 +1,17 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using PNET_Shop.Data;
 using PNET_Shop.Models;
+using PNET_Shop.Repositories;
 
 namespace PNET_Shop.Pages.Goods
 {
     public class IndexModel : PageModel
     {
-        private readonly ShopDbContext _context;
+        private readonly IGoodRepository _repository;
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ShopDbContext context, ILogger<IndexModel> logger)
+        public IndexModel(IGoodRepository repository, ILogger<IndexModel> logger)
         {
-            _context = context;
+            _repository = repository;
             _logger = logger;
         }
 
@@ -24,22 +22,16 @@ namespace PNET_Shop.Pages.Goods
         public async Task OnGetAsync(string? searchString)
         {
             SearchString = searchString;
-
-            var query = _context.Goods
-                .Include(g => g.Department)
-                .Include(g => g.Supplier)
-                .AsQueryable();
+            Goods = await _repository.GetAllAsync(searchString);
 
             if (!string.IsNullOrWhiteSpace(searchString))
             {
-                query = query.Where(g =>
-                    g.Name.Contains(searchString) ||
-                    (g.Producer != null && g.Producer.Contains(searchString)));
+                _logger.LogInformation("Виконано пошук товарів за запитом: {SearchString}", searchString);
             }
-
-            Goods = await query.ToListAsync();
-
-            _logger.LogInformation("Виконано перегляд товарів. Пошук: {SearchString}", searchString);
+            else
+            {
+                _logger.LogInformation("Виконано перегляд списку товарів");
+            }
         }
     }
 }

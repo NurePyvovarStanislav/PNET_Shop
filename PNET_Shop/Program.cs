@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PNET_Shop.Data;
+using PNET_Shop.Repositories;
 
 namespace PNET_Shop
 {
@@ -9,11 +10,12 @@ namespace PNET_Shop
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             builder.Services.AddRazorPages();
 
             builder.Services.AddDbContext<ShopDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ShopDbConnection")));
+
+            builder.Services.AddScoped<IGoodRepository, GoodRepository>();
 
             builder.Logging.ClearProviders();
             builder.Logging.AddConsole();

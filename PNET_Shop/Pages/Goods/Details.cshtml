@@ -1,4 +1,42 @@
-﻿@page
+﻿@page "{id:int}"
 @model PNET_Shop.Pages.Goods.DetailsModel
 @{
+    ViewData["Title"] = "Деталі товару";
 }
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="mb-0">Деталі товару</h1>
+        <div>
+            <a asp-page="./Edit" asp-route-id="@Model.Good.GoodId" class="btn btn-warning">Редагувати</a>
+            <a asp-page="./Index" class="btn btn-secondary">Назад</a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">Назва</dt>
+                <dd class="col-sm-9"><strong>@Model.Good.Name</strong></dd>
+
+                <dt class="col-sm-3">Ціна</dt>
+                <dd class="col-sm-9">@Model.Good.Price</dd>
+
+                <dt class="col-sm-3">Кількість</dt>
+                <dd class="col-sm-9">@Model.Good.Quantity</dd>
+
+                <dt class="col-sm-3">Виробник</dt>
+                <dd class="col-sm-9">@(Model.Good.Producer ?? "—")</dd>
+
+                <dt class="col-sm-3">Відділ</dt>
+                <dd class="col-sm-9">@Model.Good.Department?.Name</dd>
+
+                <dt class="col-sm-3">Постачальник</dt>
+                <dd class="col-sm-9">@Model.Good.Supplier?.Name</dd>
+
+                <dt class="col-sm-3">Опис</dt>
+                <dd class="col-sm-9">@(Model.Good.Description ?? "—")</dd>
+            </dl>
+        </div>
+    </div>
+</div>

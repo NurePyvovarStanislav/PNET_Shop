@@ -3,16 +3,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PNET_Shop.Data;
 using PNET_Shop.Models;
+using PNET_Shop.Repositories;
 
 namespace PNET_Shop.Pages.Goods
 {
     public class CreateModel : PageModel
     {
+        private readonly IGoodRepository _repository;
         private readonly ShopDbContext _context;
         private readonly ILogger<CreateModel> _logger;
 
-        public CreateModel(ShopDbContext context, ILogger<CreateModel> logger)
+        public CreateModel(IGoodRepository repository, ShopDbContext context, ILogger<CreateModel> logger)
         {
+            _repository = repository;
             _context = context;
             _logger = logger;
         }
@@ -36,10 +39,9 @@ namespace PNET_Shop.Pages.Goods
                 return Page();
             }
 
-            _context.Goods.Add(Good);
-            await _context.SaveChangesAsync();
+            await _repository.AddAsync(Good);
 
-            _logger.LogInformation("Додано новий товар: {GoodName}", Good.Name);
+            _logger.LogInformation("Додано новий товар: {GoodName} (Id: {GoodId})", Good.Name, Good.GoodId);
 
             return RedirectToPage("./Index");
         }

@@ -1,19 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using PNET_Shop.Data;
 using PNET_Shop.Models;
+using PNET_Shop.Repositories;
 
 namespace PNET_Shop.Pages.Goods
 {
     public class EditModel : PageModel
     {
+        private readonly IGoodRepository _repository;
         private readonly ShopDbContext _context;
         private readonly ILogger<EditModel> _logger;
 
-        public EditModel(ShopDbContext context, ILogger<EditModel> logger)
+        public EditModel(IGoodRepository repository, ShopDbContext context, ILogger<EditModel> logger)
         {
+            _repository = repository;
             _context = context;
             _logger = logger;
         }
@@ -26,7 +28,7 @@ namespace PNET_Shop.Pages.Goods
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var good = await _context.Goods.FindAsync(id);
+            var good = await _repository.GetByIdAsync(id);
 
             if (good == null)
             {
@@ -47,35 +49,22 @@ namespace PNET_Shop.Pages.Goods
                 return Page();
             }
 
-            _context.Attach(Good).State = EntityState.Modified;
-
-            try
+            if (!await _repository.ExistsAsync(Good.GoodId))
             {
-                await _context.SaveChangesAsync();
-                _logger.LogInformation("Оновлено товар: {GoodName}", Good.Name);
+                return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!GoodExists(Good.GoodId))
-                {
-                    return NotFound();
-                }
 
-                throw;
-            }
+            await _repository.UpdateAsync(Good);
+
+            _logger.LogInformation("Оновлено товар: {GoodName} (Id: {GoodId})", Good.Name, Good.GoodId);
 
             return RedirectToPage("./Index");
         }
 
-        private bool GoodExists(int id)
-        {
-            return _context.Goods.Any(e => e.GoodId == id);
-        }
-
         private void LoadSelectLists()
         {
-            Departments = new SelectList(_context.Departments, "DeptId", "Name");
-            Suppliers = new SelectList(_context.Suppliers, "SupplierId", "Name");
+            Departments = new SelectList(_context.Departments, "DeptId", "Name", Good.DeptId);
+            Suppliers = new SelectList(_context.Suppliers, "SupplierId", "Name", Good.SupplierId);
         }
     }
 }
